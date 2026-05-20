@@ -1,10 +1,11 @@
 {
   "name": "きょうりゅう音読ミッション イオリくんとスピノサウルス",
-  "short_name": "スピノ音読",
+  "short_name": "音読ミッション",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#ecfdf5",
-  "theme_color": "#10b981",
+  "background_color": "#efe7d8",
+  "theme_color": "#063b3f",
   "orientation": "portrait",
   "icons": [
     {

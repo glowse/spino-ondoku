@@ -1,49 +1,522 @@
+const STORAGE_KEY = 'spinoOndokuMissionProgressV5';
+const OLD_KEYS = ['spinoOndokuMissionProgressV3', 'spinoOndokuMissionProgressV4'];
+const missions = [
+  {
+    "id": "mission1",
+    "no": 1,
+    "title": "川底に眠る光る化石",
+    "goal": "短い説明文を、観察しながらゆっくり読む",
+    "rewardIcon": "🐟",
+    "rewardName": "光る化石スタンプ",
+    "image": "assets/mission-1.jpg",
+    "checks": [
+      "声に出して最初の一文を読めた",
+      "化石の様子を想像しながら読めた",
+      "途中で止まっても戻れた",
+      "自分のペースを守れた"
+    ],
+    "pages": [
+      {
+        "focus": "観察するように読む",
+        "title": "机の上の標本",
+        "text": "イオリくんの机には、図鑑とルーペと、小さな石の標本が置かれていた。石の表面には、魚の骨のような線が、かすかに残っている。\n\nただの飾りではない。何千万年も前の生きものが、時間の中で形を変え、今ここに届いたものだ。イオリくんは、まず一行ずつ声に出し、見つけたことを確かめることにした。"
+      },
+      {
+        "focus": "細部に気づく",
+        "title": "青白い光",
+        "text": "ルーペを近づけたとき、化石のふちが青白く光った。強い光ではない。水の底で月が揺れるような、静かで冷たい光だった。\n\nイオリくんは息を止めかけて、すぐにゆっくり吐いた。急がなくていい。驚いたときほど、言葉を短く区切って読む。"
+      },
+      {
+        "focus": "情景を読む",
+        "title": "水の記憶",
+        "text": "光は机の上に、小さな川の影を映した。流れの向こうには、シダの森と、低く広がる雲が見える。\n\n図鑑のページでしか知らなかった白亜紀が、今、声のすぐ近くにある。イオリくんは、最初のミッションが始まったことを感じた。"
+      },
+      {
+        "focus": "意味のまとまりで読む",
+        "title": "最初の手がかり",
+        "text": "化石の下には、細い文字が浮かび上がった。\n\n「川を見つけよ。流れは、過去へ向かう。」\n\n短い文なのに、不思議な重さがあった。イオリくんは、言葉の意味を追いながら、もう一度ゆっくり読み直した。"
+      },
+      {
+        "focus": "ミッション確認",
+        "title": "声に出す合図",
+        "text": "音読は、速さを競うものではない。声に出した瞬間、物語の扉が少しだけ開く。\n\nイオリくんは化石を手に取り、落ち着いて言った。\n\n「川底に眠る、光る化石。」"
+      }
+    ]
+  },
+  {
+    "id": "mission2",
+    "no": 2,
+    "title": "氾濫原に残された足跡",
+    "goal": "濁音や硬い音を、あわてず確かめて読む",
+    "rewardIcon": "👣",
+    "rewardName": "大きな足跡スタンプ",
+    "image": "assets/mission-2.jpg",
+    "checks": [
+      "足跡の説明を読めた",
+      "か・が・た・だを落ち着いて読めた",
+      "情景を想像しながら読めた",
+      "最後まで進めた"
+    ],
+    "pages": [
+      {
+        "focus": "場所を想像する",
+        "title": "泥の平原",
+        "text": "気がつくと、イオリくんは広い川のそばに立っていた。水は浅く、岸辺にはやわらかい泥が広がっている。\n\nそこは、川が何度もあふれてできた氾濫原だった。足を踏み入れると、くつの底がゆっくり沈み、ぬれた土の匂いが上がってくる。"
+      },
+      {
+        "focus": "音を確かめる",
+        "title": "三本の指",
+        "text": "泥の上には、三本の指を広げた大きな跡が続いていた。ひとつ、ふたつ、みっつ。どの跡も、イオリくんの足よりずっと大きい。\n\n「か」「が」「た」「だ」。硬い音を急いで読むと、足もと言葉がすべりやすい。彼は、音を一つずつ置くように読んだ。"
+      },
+      {
+        "focus": "推理する",
+        "title": "尾のあと",
+        "text": "足跡の横には、細長い線が何本も残っていた。まるで重い尾が、泥の表面に触れながら進んだようだった。\n\nどんな恐竜が、ここを通ったのだろう。肉食なのか、水辺にすむ種類なのか。読むことは、ただ文字を追うだけではなく、手がかりを集めることでもある。"
+      },
+      {
+        "focus": "リズムを整える",
+        "title": "川風",
+        "text": "川風が吹くたびに、浅い水面が銀色に揺れた。遠くで鳥のような生きものが鳴き、草の間から小さな虫が飛び出す。\n\nイオリくんは、足跡の向きと川の流れを見くらべた。声も同じだ。風に押されるように急がず、流れに合わせて進めばいい。"
+      },
+      {
+        "focus": "ミッション確認",
+        "title": "足跡の先へ",
+        "text": "足跡は川の上流へ向かっていた。そこには、まだ見ぬ生きものの気配がある。\n\nイオリくんは、胸の中で少しだけ緊張しながら言った。\n\n「氾濫原に残された足跡を、追ってみよう。」"
+      }
+    ]
+  },
+  {
+    "id": "mission3",
+    "no": 3,
+    "title": "スピノサウルスの影",
+    "goal": "長い恐竜名を、意味で区切って読む",
+    "rewardIcon": "🦕",
+    "rewardName": "スピノサウルススタンプ",
+    "image": "assets/mission-3.jpg",
+    "checks": [
+      "スピノサウルスを区切って読めた",
+      "長い文を一息ずつ読めた",
+      "緊張しても声に出せた",
+      "読み終えたあと戻って確認できた"
+    ],
+    "pages": [
+      {
+        "focus": "気配を読む",
+        "title": "水面のゆらぎ",
+        "text": "川の向こうで、水面が大きく揺れた。波は岸まで届き、泥の上に残った足跡を少しずつ消していく。\n\nイオリくんは、図鑑で見た背中の帆を思い出した。もし本当にあの恐竜なら、ここから先は、声を落ち着かせて進まなければならない。"
+      },
+      {
+        "focus": "観察文を読む",
+        "title": "帆を持つ影",
+        "text": "川辺の泥に残された跡は、ただの足あとではなかった。三本の鋭い指先が深く沈み、そのまわりには重い尾が触れたような線まで続いている。\n\nイオリくんは図鑑で見たスピノサウルスの骨格図を思い出し、胸の奥が少し熱くなった。"
+      },
+      {
+        "focus": "長い名前を区切る",
+        "title": "スピノ・サウルス",
+        "text": "長い名前は、無理に一気に読まなくていい。\n\nスピノ。\nサウルス。\nスピノ・サウルス。\n\n分けて読めば、言葉は少しずつ形を見せる。イオリくんは、名前を確かめるように、低い声で読み直した。"
+      },
+      {
+        "focus": "物語を読む",
+        "title": "読む冒険の入口",
+        "text": "もしこの川が白亜紀へつながっているのなら、ここは「読む冒険」の入口かもしれない。\n\n風の向きと水の流れを確かめながら、彼は息を整え、一行ずつ意味を追うように声に出した。急がなくていい。大切なのは、見つけたことを自分の言葉でたしかめることだ。"
+      },
+      {
+        "focus": "ミッション確認",
+        "title": "向き合う",
+        "text": "水面の奥から、巨大な影が静かに立ち上がった。背中の帆が夕方の光を受け、川そのものが息をしているように見える。\n\nイオリくんは一歩下がらず、はっきりと言った。\n\n「スピノサウルスの影を、見つけた。」"
+      }
+    ]
+  },
+  {
+    "id": "mission4",
+    "no": 4,
+    "title": "白亜紀の川を渡れ",
+    "goal": "場面の動きに合わせて、リズムよく読む",
+    "rewardIcon": "🌊",
+    "rewardName": "川わたりスタンプ",
+    "image": "assets/mission-4.jpg",
+    "checks": [
+      "川の流れを想像して読めた",
+      "短い文と長い文を切り替えられた",
+      "リズムを保てた",
+      "最後まで声を出せた"
+    ],
+    "pages": [
+      {
+        "focus": "流れを読む",
+        "title": "浅瀬の道",
+        "text": "川は広く、見た目よりも流れが速かった。水面には細かい波が走り、沈んだ木の枝がゆっくり回っている。\n\nスピノサウルスは浅い場所を選び、足を一歩ずつ置いた。その動きには、川をよく知る生きものだけが持つ落ち着きがあった。"
+      },
+      {
+        "focus": "リズムを読む",
+        "title": "水音",
+        "text": "ざぶん。\nざぶん。\n\n短い音を読むときは、体の中に小さなリズムを作る。イオリくんは、水音に合わせて声を出した。速くならなくていい。一定の速さで進むことが、いちばん強い。"
+      },
+      {
+        "focus": "説明を読む",
+        "title": "魚の群れ",
+        "text": "足もとを、小さな魚の群れが銀色に走った。スピノサウルスの長い口は、水面の動きを追っている。\n\nけれど、今は狩りの時間ではない。川を渡り、向こう岸にある古い森へたどり着くことが、このミッションの目的だった。"
+      },
+      {
+        "focus": "緊張を読む",
+        "title": "深い流れ",
+        "text": "川の中央だけ、色が急に濃くなっていた。そこは深く、流れも強い。イオリくんは手をぎゅっと握りかけた。\n\nそれでも、声は小さく整える。怖い場面ほど、読む速さを落とす。言葉を一つずつ岸に置くように進めば、向こう側が見えてくる。"
+      },
+      {
+        "focus": "ミッション確認",
+        "title": "向こう岸",
+        "text": "最後の一歩で、水しぶきが高く上がった。足もとは固い土に変わり、川の音が少し遠くなる。\n\nイオリくんは、濡れた袖を見て笑った。\n\n「白亜紀の川を、渡りきった。」"
+      }
+    ]
+  },
+  {
+    "id": "mission5",
+    "no": 5,
+    "title": "ティラノサウルスの気配",
+    "goal": "緊張する場面でも、間を取って読む",
+    "rewardIcon": "🦖",
+    "rewardName": "ティラノ気配スタンプ",
+    "image": "assets/mission-5.jpg",
+    "checks": [
+      "ドキドキする場面を読めた",
+      "間を取って読めた",
+      "強い言葉を急がず読めた",
+      "不安になっても戻れた"
+    ],
+    "pages": [
+      {
+        "focus": "静けさを読む",
+        "title": "森が止まる",
+        "text": "森に入ったとたん、周囲の音がすっと消えた。虫の羽音も、遠くの水音も、急に遠ざかったように感じる。\n\nイオリくんは、静けさにも種類があることに気づいた。これは、何かが近くにいるときの静けさだ。"
+      },
+      {
+        "focus": "重い音を読む",
+        "title": "地面の震え",
+        "text": "ドン。\n\n足もとの小石が跳ねた。\n\nドン。\n\n次の音は、少し近い。ティラノサウルスという名前が頭に浮かんだ瞬間、心臓の音まで大きくなった。"
+      },
+      {
+        "focus": "落ち着く言葉",
+        "title": "呼吸を戻す",
+        "text": "あわてると、文字は急に遠くなる。そんなときは、一度息を吐いてから、見えている言葉だけを読む。\n\n全部を完璧に読もうとしなくていい。今の一行を、自分の速さで読めばいい。"
+      },
+      {
+        "focus": "迫力を読む",
+        "title": "王者の影",
+        "text": "木々の間から、巨大な頭がゆっくり現れた。厚い首、鋭い歯、太い後ろ足。まさに白亜紀の王者だった。\n\nけれどイオリくんは、逃げる前に観察した。恐怖だけでなく、事実を読む。そこにあるものを、声にして確かめる。"
+      },
+      {
+        "focus": "ミッション確認",
+        "title": "一歩下がって読む",
+        "text": "ティラノサウルスは、風下の匂いを探るように頭を上げた。今なら、静かに離れられる。\n\nイオリくんは小さくうなずき、落ち着いた声で言った。\n\n「ティラノサウルスの気配を、読んだ。」"
+      }
+    ]
+  },
+  {
+    "id": "mission6",
+    "no": 6,
+    "title": "失われた巣を追って",
+    "goal": "問いかけ文と説明文を、声の調子で読み分ける",
+    "rewardIcon": "🪽",
+    "rewardName": "巣さがしスタンプ",
+    "image": "assets/mission-6.jpg",
+    "checks": [
+      "問いかけ文を読めた",
+      "長い恐竜名を分けて読めた",
+      "説明文を落ち着いて読めた",
+      "声の調子を工夫できた"
+    ],
+    "pages": [
+      {
+        "focus": "問いかける",
+        "title": "割れた殻",
+        "text": "森の奥で、白い卵の殻が見つかった。割れ目は新しく、まわりの草には踏み倒されたあとがある。\n\nイオリくんはしゃがみこみ、そっとたずねるように読んだ。\n\n「この巣は、だれのものですか。」"
+      },
+      {
+        "focus": "長い名前を読む",
+        "title": "トリケラトプス",
+        "text": "低い草をかき分けて、トリケラトプスの親子が現れた。三本の角と大きなえり飾りは、遠くからでもすぐにわかる。\n\nトリケラ。\nトプス。\nトリケラトプス。\n\n長い名前は、分けて読むと落ち着いて届く。"
+      },
+      {
+        "focus": "空を見る",
+        "title": "プテラノドンの影",
+        "text": "空を横切る影が、地面をすばやく走った。見上げると、プテラノドンが大きな翼を広げて旋回している。\n\n「この巣を見ませんでしたか。」\n\n問いかける文は、最後を少しだけ上げる。イオリくんは、相手に届く声を想像して読んだ。"
+      },
+      {
+        "focus": "手がかりを整理する",
+        "title": "折れた枝",
+        "text": "卵の殻、踏み倒された草、折れた枝。ばらばらに見えた手がかりは、向きをそろえると一本の線になった。\n\nその線は、川辺の岩場へ続いている。読むことも同じだ。一つの文が次の文を呼び、物語の道を作っていく。"
+      },
+      {
+        "focus": "ミッション確認",
+        "title": "巣の場所",
+        "text": "岩場の陰に、古い巣があった。中には、まだ温かさの残る卵が一つ。\n\nイオリくんは、声を強くしすぎないようにして言った。\n\n「失われた巣を、見つけた。」"
+      }
+    ]
+  },
+  {
+    "id": "mission7",
+    "no": 7,
+    "title": "川辺の約束",
+    "goal": "やさしい声で、感情のある文を読む",
+    "rewardIcon": "👶",
+    "rewardName": "川辺の約束スタンプ",
+    "image": "assets/mission-7.jpg",
+    "checks": [
+      "やさしい声で読めた",
+      "気持ちを込めて読めた",
+      "会話文を落ち着いて読めた",
+      "自分の言葉で確かめられた"
+    ],
+    "pages": [
+      {
+        "focus": "静かな場面",
+        "title": "夕方の川辺",
+        "text": "夕方の川辺は、昼間よりずっと静かだった。水面には赤い空が映り、遠くの森は黒い影になっている。\n\nスピノサウルスは川の中に立ち、まるで流れの番人のように、周りを見守っていた。"
+      },
+      {
+        "focus": "やさしく読む",
+        "title": "小さな声",
+        "text": "草の陰から、小さな恐竜が顔を出した。迷っていたのだろう。体には泥がつき、目だけが不安そうに光っている。\n\nイオリくんは、声を少しやわらかくして読んだ。\n\n「もう、大丈夫。」"
+      },
+      {
+        "focus": "会話を読む",
+        "title": "スピノサウルスの返事",
+        "text": "スピノサウルスは、低く短く鳴いた。その声は大きいのに、川を荒らすような音ではなかった。\n\nイオリくんには、それが返事のように聞こえた。\n\n「この川を、忘れない。」"
+      },
+      {
+        "focus": "考えを読む",
+        "title": "読む力",
+        "text": "声に出して読むと、ただの文字が自分の中で形を持ちはじめる。怖かった場面も、うまく言えなかった言葉も、もう一度たしかめることができる。\n\nイオリくんは思った。読む力は、急いで進む力ではない。止まりながらでも、戻りながらでも、最後まで歩く力だ。"
+      },
+      {
+        "focus": "ミッション確認",
+        "title": "約束",
+        "text": "川の向こうで、最後の光が消えかけていた。イオリくんはスピノサウルスの影を見上げ、静かにうなずいた。\n\n「また読むよ。自分のペースで。」\n\nそれが、川辺の約束だった。"
+      }
+    ]
+  },
+  {
+    "id": "mission8",
+    "no": 8,
+    "title": "音読ミッション達成",
+    "goal": "物語全体をふり返り、達成感を持って読む",
+    "rewardIcon": "🏆",
+    "rewardName": "音読ミッション達成スタンプ",
+    "image": "assets/mission-8.jpg",
+    "checks": [
+      "最後のページを読めた",
+      "これまでの冒険を思い出せた",
+      "自分のペースを認められた",
+      "音読ミッションを達成できた"
+    ],
+    "pages": [
+      {
+        "focus": "ふり返る",
+        "title": "八つの手がかり",
+        "text": "机の上には、八つのスタンプが並んでいた。化石、足跡、川、巣、そしてスピノサウルスの影。\n\nどれも、ただ集めた印ではない。イオリくんが声に出し、考え、止まりながらも進んだ証だった。"
+      },
+      {
+        "focus": "気づきを読む",
+        "title": "読めた日のこと",
+        "text": "すらすら読めた日もあれば、同じ言葉で何度も止まった日もあった。けれど、それで冒険が失敗になることはなかった。\n\n声に出したこと。ゆっくり読んだこと。戻って読み直したこと。その全部が、ミッションの一部だった。"
+      },
+      {
+        "focus": "自分の言葉",
+        "title": "ぼくの速度",
+        "text": "誰かと同じ速さで進まなくてもいい。イオリくんには、イオリくんの速度がある。\n\nその速度で読んだからこそ、見つけられた景色があった。文字の奥にある川の音や、恐竜の息づかいまで、しっかり感じられた。"
+      },
+      {
+        "focus": "達成の場面",
+        "title": "伝説の一ページ",
+        "text": "化石の光が、最後のページを照らした。そこには、白亜紀の川辺に立つイオリくんと、静かに寄りそうスピノサウルスの姿が描かれている。\n\nページの下には、短い言葉が刻まれていた。\n\n「声に出した者だけが、この道を見つける。」"
+      },
+      {
+        "focus": "最後の音読",
+        "title": "ミッション達成",
+        "text": "イオリくんは、深く息を吸った。\n\nそして、最後の一文を、自分の声で読んだ。\n\n「きょうりゅう音読ミッション、達成。」\n\n急がなくていい。これからも、声に出せた一歩が、次の冒険につながっていく。"
+      }
+    ]
+  }
+];
 
-const STORAGE_KEY="spinoOndokuMissionProgressV3";
-const missions=[{"id": "mission1", "title": "ミッション1", "subtitle": "ひかる魚の化石", "goal": "短い文を、ゆっくり読む", "icon": "✨", "rewardIcon": "🐟", "rewardName": "ひかる魚の化石スタンプ", "successScene": "fossil", "checks": ["イオリくん、と読めた", "ひかる魚の化石、と読めた", "ピカッ、と読めた", "ゆっくり読めた", "今日のミッション成功！"], "pages": [{"mark": "🦕 ゆっくり読む", "scene": "morning", "sceneTitle": "きょうりゅうが 大すき", "lines": ["イオリくんは／", "きょうりゅうが／", "大すきです。", "", "今日も／", "図鑑を／", "見ていました。"]}, {"mark": "✨ 短く読む", "scene": "fossil", "sceneTitle": "小さな 石", "lines": ["机の上に／", "小さな石が／", "ありました。", "", "魚の形が／", "うすく／", "見えます。"]}, {"mark": "✨ ふしぎに読む", "scene": "fossil", "sceneTitle": "ピカッ", "lines": ["その石が／", "光りました。", "", "ピカッ。", "", "イオリくんは／", "目を丸くしました。"]}, {"mark": "🌬️ ゆっくり読む", "scene": "wind", "sceneTitle": "風の音", "lines": ["石に／", "そっと／", "さわると――", "", "ビューン。", "", "風の音が／", "聞こえました。"]}, {"mark": "🌊 短い文を読む", "scene": "riverWide", "sceneTitle": "知らない 川", "lines": ["気がつくと、", "イオリくんは／", "川のそばに／", "いました。", "", "水が／", "ゆっくり／", "流れています。"]}, {"mark": "🎤 音読ミッション1", "scene": "words", "sceneTitle": "ことばの れんしゅう", "wordPractice": true, "lines": ["短く、", "ゆっくり読もう。", "", "イオリくん", "石", "魚", "ピカッ"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「何が光った？」", "", "子ども：", "「魚の化石！」", "", "おうちの人：", "「ゆっくり読めたね。」"]}]}, {"id": "mission2", "title": "ミッション2", "subtitle": "大きな川と足あと", "goal": "「か」「が」「た」「だ」をゆっくり読む", "icon": "🌊", "rewardIcon": "👣", "rewardName": "大きな足あとスタンプ", "successScene": "eggNest", "checks": ["かわ、と読めた", "大きな足あと、と読めた", "か・が・た・だ、と読めた", "タマゴ、と読めた", "今日のミッション成功！"], "pages": [{"mark": "🌊 ミッション2", "scene": "riverWide", "sceneTitle": "大きな川", "lines": ["川は／", "大きく／", "流れています。", "", "ざあ。", "ざあ。", "", "イオリくんは／", "川べりを／歩きます。"]}, {"mark": "🦖 ゆっくり読む", "scene": "tracksClose", "sceneTitle": "大きな 足あと", "lines": ["ぬれた土に／", "大きな足あとが／", "ありました。", "", "ひとつ。", "ふたつ。", "みっつ。"]}, {"mark": "🎤 音のれんしゅう", "scene": "tracksClose", "sceneTitle": "か・が・た・だ", "wordPractice": true, "lines": ["か。", "が。", "", "た。", "だ。", "", "ゆっくり／", "声に出そう。"]}, {"mark": "🥚 やさしく読む", "scene": "eggNest", "sceneTitle": "まいごの タマゴ", "lines": ["草の中に／", "タマゴが／", "ありました。", "", "白くて、", "丸くて、", "少しだけ／", "ゆれています。"]}, {"mark": "🥚 そっと読む", "scene": "eggNest", "sceneTitle": "コトン", "lines": ["コトン。", "コトン。", "", "タマゴは／", "まいごに／", "なっているようです。", "", "イオリくんは／", "そっと見ました。"]}, {"mark": "🎤 音読ミッション2", "scene": "words", "sceneTitle": "ことばの れんしゅう", "wordPractice": true, "lines": ["かわ", "", "あしあと", "", "タマゴ", "", "か・が・た・だ"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「何を見つけた？」", "", "子ども：", "「まいごのタマゴ！」", "", "おうちの人：", "「やさしく読めたね。」"]}]}, {"id": "mission3", "title": "ミッション3", "subtitle": "スピノサウルス、あらわる", "goal": "長い恐竜名を分けて読む", "icon": "🦕", "rewardIcon": "🦕", "rewardName": "スピノサウルススタンプ", "successScene": "spinoGentle", "checks": ["スピノ、と読めた", "サウルス、と読めた", "スピノサウルス、と読めた", "長い名前を分けて読めた", "今日のミッション成功！"], "pages": [{"mark": "🌊 静かに読む", "scene": "riverWide", "sceneTitle": "川の むこう", "lines": ["川のむこうで／", "水が／", "大きく／", "はねました。", "", "バシャーン。", "", "イオリくんは／", "息をのみました。"]}, {"mark": "🦕 ゆっくり読む", "scene": "spino", "sceneTitle": "大きな ほ", "lines": ["せなかに／", "大きな／ほ。", "", "長い口。", "", "するどい爪。", "", "大きな恐竜が／", "立っています。"]}, {"mark": "⭐ 名前を分けて読む", "scene": "spinoClose", "sceneTitle": "スピノ・サウルス", "wordPractice": true, "lines": ["スピノ。", "", "サウルス。", "", "スピノ・サウルス。", "", "長い名前は／", "分けて読もう。"]}, {"mark": "🥚 安心して読む", "scene": "spinoGentle", "sceneTitle": "こわくない", "lines": ["スピノサウルスは／", "ゆっくり／", "首を下げました。", "", "こわい声では／", "ありません。", "", "グルル……。"]}, {"mark": "🫧 合言葉", "scene": "spinoGentle", "sceneTitle": "ゆっくりでいい", "lines": ["だいじょうぶ。", "", "ゆっくりでいい。", "", "すいすい、すすもう。"]}, {"mark": "🎤 音読ミッション3", "scene": "words", "sceneTitle": "長い名前の れんしゅう", "wordPractice": true, "lines": ["スピノ", "", "サウルス", "", "スピノ・サウルス", "", "スピノサウルス"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「大きな恐竜の名前は？」", "", "子ども：", "「スピノ・サウルス！」", "", "おうちの人：", "「分けて読めたね。」"]}]}, {"id": "mission4", "title": "ミッション4", "subtitle": "川をわたれ", "goal": "リズムよく読む", "icon": "🐟", "rewardIcon": "🌊", "rewardName": "川わたりスタンプ", "successScene": "fishRiver", "checks": ["ざぶん、と読めた", "すいすい、と読めた", "魚、と読めた", "リズムよく読めた", "今日のミッション成功！"], "pages": [{"mark": "🌊 ミッション4", "scene": "fishRiver", "sceneTitle": "川を わたれ", "lines": ["川の水は／", "きらきら／", "光っています。", "", "小さな魚が／", "すいすい／", "泳いでいます。"]}, {"mark": "🐟 リズムよく読む", "scene": "fishRiver", "sceneTitle": "すいすい", "wordPractice": true, "lines": ["すいすい。", "", "すいすい。", "", "魚が／", "川を／", "泳ぎます。"]}, {"mark": "🦕 ゆっくり読む", "scene": "riverNear", "sceneTitle": "スピノの せなか", "lines": ["スピノサウルスは／", "川の中に／", "入りました。", "", "イオリくんは／", "せなかに／", "つかまります。"]}, {"mark": "🌊 音を読む", "scene": "fishRiver", "sceneTitle": "ざぶん ざぶん", "wordPractice": true, "lines": ["ざぶん。", "ざぶん。", "", "ゆっくり。", "ゆっくり。", "", "川を／", "わたります。"]}, {"mark": "🐟 楽しく読む", "scene": "fishRiver", "sceneTitle": "魚の あいさつ", "lines": ["魚が／", "ぴょんと／", "はねました。", "", "まるで、", "「がんばれ。」", "そう言っている／", "ようです。"]}, {"mark": "🎤 音読ミッション4", "scene": "words", "sceneTitle": "リズムの れんしゅう", "wordPractice": true, "lines": ["すいすい", "", "ざぶん", "", "ざぶん ざぶん", "", "川を わたる"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「川をどう進んだ？」", "", "子ども：", "「すいすい、ざぶん！」", "", "おうちの人：", "「リズムがよかったね。」"]}]}, {"id": "mission5", "title": "ミッション5", "subtitle": "ティラノサウルスの足音", "goal": "ドキドキ場面でもゆっくり読む", "icon": "🦖", "rewardIcon": "🦖", "rewardName": "ティラノ足音スタンプ", "successScene": "trex", "checks": ["ドン、と読めた", "ティラノサウルス、と読めた", "こわくてもゆっくり読めた", "だいじょうぶ、と読めた", "今日のミッション成功！"], "pages": [{"mark": "🦖 ドキドキして読む", "scene": "tracksClose", "sceneTitle": "大きな 足音", "lines": ["森のむこうから／", "足音が／", "聞こえました。", "", "ドン。", "ドン。", "ドン。"]}, {"mark": "🦖 ゆっくり読む", "scene": "trex", "sceneTitle": "ティラノサウルス", "lines": ["木のあいだから／", "大きな恐竜が／", "あらわれました。", "", "ティラノ。", "", "ティラノサウルス。"]}, {"mark": "🫧 安心して読む", "scene": "spinoGentle", "sceneTitle": "あわてない", "lines": ["イオリくんは／", "胸に手を／", "あてました。", "", "だいじょうぶ。", "", "ゆっくり／", "読もう。"]}, {"mark": "🎤 足音を読む", "scene": "trex", "sceneTitle": "ドン ドン ドン", "wordPractice": true, "lines": ["ドン。", "", "ドン。", "", "ドン。", "", "こわくても／", "ゆっくり。"]}, {"mark": "🦕 やさしく読む", "scene": "spinoGentle", "sceneTitle": "スピノが となりにいる", "lines": ["スピノサウルスが／", "となりに／", "立っています。", "", "イオリくんは／", "少しだけ／", "ほっとしました。"]}, {"mark": "🎤 音読ミッション5", "scene": "words", "sceneTitle": "ドキドキことば", "wordPractice": true, "lines": ["ドン", "", "足音", "", "ティラノ", "", "ティラノサウルス"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「こわい場面でも？」", "", "子ども：", "「ゆっくり読む！」", "", "おうちの人：", "「それで大成功。」"]}]}, {"id": "mission6", "title": "ミッション6", "subtitle": "タマゴの親をさがせ", "goal": "問いかけ文を読む", "icon": "❓", "rewardIcon": "🪽", "rewardName": "親さがしスタンプ", "successScene": "pteranodon", "checks": ["だれのタマゴ？と読めた", "トリケラトプス、と読めた", "プテラノドン、と読めた", "問いかけ文を読めた", "今日のミッション成功！"], "pages": [{"mark": "❓ ミッション6", "scene": "eggNest", "sceneTitle": "だれの タマゴ？", "lines": ["イオリくんは／", "タマゴを／", "見ました。", "", "このタマゴは／", "だれのタマゴ？", "", "親を／", "さがします。"]}, {"mark": "🦕 問いかけるように読む", "scene": "triceratops", "sceneTitle": "トリケラトプス", "lines": ["大きな角の／", "恐竜が／", "いました。", "", "トリケラトプスさん。", "", "このタマゴは／", "あなたのですか？"]}, {"mark": "🌿 答えを読む", "scene": "triceratops", "sceneTitle": "ちがうみたい", "lines": ["トリケラトプスは／", "ゆっくり／", "首をふりました。", "", "ちがうよ。", "", "でも、", "いっしょに／", "さがそう。"]}, {"mark": "🪽 空を見て読む", "scene": "pteranodon", "sceneTitle": "プテラノドン", "lines": ["空から／", "大きな影が／", "おりました。", "", "プテラノドンさん。", "", "このタマゴを／", "知っていますか？"]}, {"mark": "❓ 問いかけの練習", "scene": "words", "sceneTitle": "ですか？", "wordPractice": true, "lines": ["だれのタマゴ？", "", "あなたのですか？", "", "知っていますか？", "", "どこですか？"]}, {"mark": "✨ ふしぎに読む", "scene": "fossilPath", "sceneTitle": "化石が ひかる", "lines": ["魚の化石が／", "また光りました。", "", "ピカ。", "ピカ。", "", "光は／", "川のほうを／", "さしています。"]}, {"mark": "🎤 音読ミッション6", "scene": "words", "sceneTitle": "長い名前も ゆっくり", "wordPractice": true, "lines": ["トリケラ", "トプス", "", "プテラ", "ノドン", "", "プテラノドン"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「なんて聞く？」", "", "子ども：", "「あなたのですか？」", "", "おうちの人：", "「問いかけられたね。」"]}]}, {"id": "mission7", "title": "ミッション7", "subtitle": "スピノサウルスの川", "goal": "やさしい声で読む", "icon": "💧", "rewardIcon": "👶", "rewardName": "赤ちゃん恐竜スタンプ", "successScene": "eggDialogue", "checks": ["やさしい声で読めた", "赤ちゃん恐竜、と読めた", "おかえり、と読めた", "だいじょうぶ、と読めた", "今日のミッション成功！"], "pages": [{"mark": "💧 ミッション7", "scene": "riverNear", "sceneTitle": "スピノサウルスの川", "lines": ["川のそばに／", "しずかな場所が／", "ありました。", "", "スピノサウルスは／", "そこを／", "よく知っています。"]}, {"mark": "👶 やさしく読む", "scene": "eggDialogue", "sceneTitle": "赤ちゃん恐竜", "lines": ["草のかげから／", "小さな恐竜が／", "出てきました。", "", "ピイ。", "", "赤ちゃん恐竜です。"]}, {"mark": "🦕 やさしい声で読む", "scene": "spinoGentle", "sceneTitle": "おかえり", "lines": ["スピノサウルスは／", "低く、", "やさしい声で／", "鳴きました。", "", "おかえり。", "", "だいじょうぶ。"]}, {"mark": "👦 ゆっくり読む", "scene": "eggDialogue", "sceneTitle": "イオリくんの声", "lines": ["イオリくんも／", "小さな声で／", "言いました。", "", "おかえり。", "", "もう、", "まいごじゃないよ。"]}, {"mark": "🎤 やさしいことば", "scene": "words", "sceneTitle": "やさしく読む", "wordPractice": true, "lines": ["おかえり", "", "だいじょうぶ", "", "こわくないよ", "", "いっしょにいるよ"]}, {"mark": "🌊 しずかに読む", "scene": "fishRiver", "sceneTitle": "川の音", "lines": ["川の音が／", "やさしく／", "聞こえます。", "", "ざあ。", "ざあ。", "", "みんなで／", "休みました。"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「どんな声で読む？」", "", "子ども：", "「やさしい声。」", "", "おうちの人：", "「とてもいい声だね。」"]}]}, {"id": "mission8", "title": "ミッション8", "subtitle": "音読ミッション、成功！", "goal": "達成感で終わる", "icon": "🌟", "rewardIcon": "🏆", "rewardName": "音読ミッション成功スタンプ", "successScene": "celebration", "checks": ["最後まで声に出せた", "ゆっくり読めた", "とまっても戻れた", "ぼくは読めた、と言えた", "全ミッション成功！"], "pages": [{"mark": "🌟 ミッション8", "scene": "celebration", "sceneTitle": "ここまで 来たね", "lines": ["イオリくんは／", "たくさんの道を／", "進みました。", "", "川。", "足あと。", "タマゴ。", "恐竜たち。"]}, {"mark": "👦 自分の声で読む", "scene": "celebration", "sceneTitle": "ぼくは 読めた", "lines": ["イオリくんは／", "胸に手を／", "あてました。", "", "ぼくは、", "読めた。", "", "ゆっくりだけど、", "読めた。"]}, {"mark": "🫧 安心して読む", "scene": "celebration", "sceneTitle": "とまっても いい", "lines": ["とまっても／", "だいじょうぶ。", "", "言いなおしても／", "だいじょうぶ。", "", "声に出せたら／", "それが成功。"]}, {"mark": "🎤 最後のミッション", "scene": "words", "sceneTitle": "できたことば", "wordPractice": true, "lines": ["イオリくん", "", "スピノサウルス", "", "だいじょうぶ", "", "ぼくは 読めた"]}, {"mark": "🌟 せいこう！", "scene": "celebration", "sceneTitle": "音読ミッション 成功", "lines": ["きょうりゅう音読ミッション。", "", "イオリくんと／", "スピノサウルス。", "", "ぜんぶ／", "大成功！"]}, {"mark": "👨‍👦 親子で読むパート", "scene": "dialogue", "sceneTitle": "いっしょに 読む", "dialogue": true, "lines": ["おうちの人：", "「最後に言おう。」", "", "子ども：", "「ぼくは、読めた！」", "", "おうちの人：", "「大成功！」"]}]}];
-const praiseMessages=["いいね！ ゆっくり読めたね。","すごい！ スピノも聞いているよ。","だいじょうぶ。自分の速さで読めたね。","ナイス音読！ すいすい進んだね。","しっぽフリフリ！ よくできたね。","星がキラッ！ 今日も一歩すすんだね。"];
-const supportMessages=["とまっても、だいじょうぶ。","ゆっくりでいいよ。","息をふーっとしてから読もう。","一文字ずつで、だいじょうぶ。","スピノがとなりで聞いているよ。","読めるところから、すいすい進もう。"];
-let state={screen:"home",missionIndex:0,page:0,fontSize:32,completedPages:{},checked:{},praise:"",reacting:false,completedMissions:loadProgress()};
-function loadProgress(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}")}catch{return {}}}
-function saveProgress(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state.completedMissions))}catch{}}
-function setState(p){state={...state,...p};render()}
-function curM(){return missions[state.missionIndex]} function curP(){return curM().pages[state.page]}
-function doneCount(){return Object.values(state.completedMissions).filter(Boolean).length}
-function recIndex(){const i=missions.findIndex(m=>!state.completedMissions[m.id]);return i===-1?missions.length-1:i}
-function startMission(i){setState({screen:"reader",missionIndex:i,page:0,completedPages:{},checked:{},praise:"",reacting:false})}
-function backHome(){setState({screen:"home",praise:"",reacting:false})}
-function showPraise(){const msg=praiseMessages[Math.floor(Math.random()*praiseMessages.length)];setState({praise:msg,reacting:true});setTimeout(()=>setState({reacting:false}),950);setTimeout(()=>setState({praise:""}),1800)}
-function showSupport(){const msg=supportMessages[Math.floor(Math.random()*supportMessages.length)];setState({praise:"🫧 "+msg,reacting:false});setTimeout(()=>setState({praise:""}),2600)}
-function markRead(){state.completedPages[state.page]=true;showPraise()}
-function goPrev(){if(state.page>0)setState({page:state.page-1,praise:"",reacting:false})}
-function goNext(){const m=curM();if(state.page<m.pages.length-1)setState({page:state.page+1,praise:"",reacting:false});else{state.completedMissions[m.id]=true;saveProgress();setState({screen:"success",praise:"",reacting:false})}}
-function readAgain(){setState({screen:"reader",page:0,completedPages:{},checked:{},praise:"",reacting:false})}
-function goNextMission(){startMission(Math.min(state.missionIndex+1,missions.length-1))}
-function esc(s){return String(s).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
-
-function spinoSVG(x=560,y=340,s=0.9){return `<g transform="translate(${x} ${y}) scale(${s})"><path d="M176 76 C148 7 160 -70 202 -132 C220 -158 239 -181 258 -196 C299 -113 314 -25 294 84 Z" fill="#a46336" stroke="#344640" stroke-width="4"/><path d="M200 55 C203 -28 221 -98 257 -171" stroke="#3f514d" stroke-width="3" opacity=".55"/><path d="M228 54 C229 -18 242 -82 268 -146" stroke="#3f514d" stroke-width="3" opacity=".38"/><ellipse cx="210" cy="140" rx="168" ry="88" fill="#5f746f"/><path d="M72 121 C20 104 -50 106 -126 130 C-173 145 -200 174 -164 187 C-94 211 -10 185 58 169 C96 160 105 135 72 121 Z" fill="#6d867e" stroke="#344640" stroke-width="4"/><path d="M-164 176 C-108 189 -54 184 2 171" stroke="#263531" stroke-width="4" stroke-linecap="round" opacity=".42"/><path d="M-136 153 C-94 141 -54 142 -16 151" fill="none" stroke="#c8d3c6" stroke-width="3" stroke-linecap="round" opacity=".35"/><circle cx="-104" cy="133" r="8" fill="#17201e"/><circle cx="-107" cy="130" r="2" fill="#fff" opacity=".9"/><path d="M-61 177 L-55 187 M-35 181 L-29 191 M-9 176 L-4 185" stroke="#f4efe2" stroke-width="3" stroke-linecap="round" opacity=".8"/><path d="M94 169 C140 205 235 219 314 177 C277 229 170 250 91 200 Z" fill="#c2c7b5" opacity=".35"/><path d="M346 147 C448 165 534 206 635 276" fill="none" stroke="#556b65" stroke-width="38" stroke-linecap="round"/><path d="M152 203 L119 322" stroke="#4f655f" stroke-width="28" stroke-linecap="round"/><path d="M270 203 L309 322" stroke="#4f655f" stroke-width="28" stroke-linecap="round"/><path d="M106 318 L83 332 M123 321 L108 342 M307 318 L291 338 M321 317 L337 332" stroke="#374943" stroke-width="5" stroke-linecap="round"/><path d="M116 155 L76 226" stroke="#5c746d" stroke-width="15" stroke-linecap="round"/><path d="M276 154 L320 220" stroke="#5c746d" stroke-width="15" stroke-linecap="round"/><g fill="#21332f" opacity=".2"><ellipse cx="138" cy="114" rx="11" ry="7"/><ellipse cx="196" cy="96" rx="8" ry="6"/><ellipse cx="260" cy="132" rx="12" ry="8"/><ellipse cx="96" cy="138" rx="7" ry="5"/></g></g>`}
-function ioriSVG(x=230,y=495,s=0.9){return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="44" rx="34" ry="10" fill="#4b3d2c" opacity=".22"/><circle cx="0" cy="-42" r="18" fill="#f2cfb1"/><path d="M-18 -48 C-15 -68 14 -70 19 -49 C13 -60 -7 -60 -18 -48 Z" fill="#3b2f2b"/><rect x="-18" y="-20" width="36" height="44" rx="14" fill="#f4c542"/><rect x="-12" y="18" width="24" height="16" rx="6" fill="#5c7cfa"/><path d="M-16 -6 L-28 12" stroke="#f2cfb1" stroke-width="8" stroke-linecap="round"/><path d="M16 -6 L28 12" stroke="#f2cfb1" stroke-width="8" stroke-linecap="round"/><path d="M-8 34 L-12 58" stroke="#4b5563" stroke-width="8" stroke-linecap="round"/><path d="M8 34 L12 58" stroke="#4b5563" stroke-width="8" stroke-linecap="round"/><circle cx="-6" cy="-44" r="2" fill="#222"/><circle cx="7" cy="-44" r="2" fill="#222"/><path d="M-5 -35 C-1 -32 4 -32 8 -35" fill="none" stroke="#8a4a3a" stroke-width="2" stroke-linecap="round"/></g>`}
-function eggSVG(x=305,y=410,s=1){return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="42" rx="78" ry="24" fill="#4d3b26" opacity=".24"/><ellipse cx="0" cy="38" rx="82" ry="29" fill="#8b6a41" opacity=".55"/><path d="M-72 38 C-46 11 -20 -4 0 -4 C22 -4 48 11 72 38" fill="none" stroke="#7b5d37" stroke-width="10" stroke-linecap="round"/><ellipse cx="0" cy="0" rx="35" ry="48" fill="#eee2d2" stroke="#c7bcaa" stroke-width="3"/><path d="M-14 -33 C-8 -43 11 -43 18 -30" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".35"/></g>`}
-function fossilSVG(x=170,y=545,s=1){return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="0" rx="118" ry="82" fill="#ffd24d" opacity=".28"/><ellipse cx="0" cy="0" rx="92" ry="58" fill="#80725c"/><ellipse cx="0" cy="0" rx="76" ry="44" fill="#93866d" opacity=".65"/><path d="M-44 -2 C-10 -28 38 -22 64 0 C38 22 -10 28 -44 2 Z" fill="none" stroke="#f7ec9c" stroke-width="9" stroke-linecap="round"/><path d="M-10 -24 L-10 24 M16 -20 L16 20 M41 -10 L41 10" stroke="#f7ec9c" stroke-width="5" stroke-linecap="round"/><path d="M64 0 L86 -18 L86 18 Z" fill="none" stroke="#f7ec9c" stroke-width="8" stroke-linejoin="round"/></g>`}
-function fishSVG(x=760,y=430,s=1){return `<g transform="translate(${x} ${y}) scale(${s})"><path d="M-30 0 C2 -25 52 -25 85 0 C52 25 2 25 -30 0 Z" fill="#f6b84b" stroke="#8d6b28" stroke-width="4"/><path d="M85 0 L120 -20 L120 20 Z" fill="#e89b34" stroke="#8d6b28" stroke-width="4"/><circle cx="-2" cy="-6" r="5" fill="#20302d"/><path d="M32 -17 L25 18" stroke="#fff1b8" stroke-width="4" stroke-linecap="round" opacity=".75"/></g>`}
-function trexSVG(x=670,y=375,s=0.9){return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="190" cy="135" rx="138" ry="76" fill="#745235"/><path d="M82 94 C28 52 -42 60 -82 98 C-44 134 28 133 82 110 Z" fill="#7b5a39" stroke="#3f3026" stroke-width="5"/><circle cx="-38" cy="91" r="8" fill="#151c1a"/><path d="M-82 109 C-44 121 -4 119 38 111" stroke="#f0e1c2" stroke-width="4" stroke-linecap="round" opacity=".8"/><path d="M305 136 C390 145 455 180 520 228" fill="none" stroke="#6a4c32" stroke-width="38" stroke-linecap="round"/><path d="M150 198 L118 312 M250 198 L286 312" stroke="#604630" stroke-width="32" stroke-linecap="round"/><path d="M100 150 L55 185 M252 150 L305 174" stroke="#6f5135" stroke-width="14" stroke-linecap="round"/><path d="M104 310 L80 326 M118 313 L119 338 M285 310 L264 330 M300 312 L318 330" stroke="#382a22" stroke-width="5" stroke-linecap="round"/></g>`}
-function triceratopsSVG(x=610,y=455,s=0.82){return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="170" cy="95" rx="135" ry="70" fill="#6e8356"/><path d="M38 72 C-22 38 -78 50 -102 96 C-61 129 -13 134 43 105 Z" fill="#78915f" stroke="#3f5138" stroke-width="5"/><path d="M-75 58 C-105 26 -119 -12 -103 -35 C-52 -26 -18 5 4 54 Z" fill="#91a97b" stroke="#3f5138" stroke-width="5"/><path d="M-101 65 L-154 34 M-76 48 L-88 -8 M-42 54 L-5 22" stroke="#efe4c9" stroke-width="11" stroke-linecap="round"/><circle cx="-48" cy="76" r="7" fill="#1d2723"/><path d="M95 150 L72 225 M185 152 L176 226 M240 145 L262 218" stroke="#536846" stroke-width="28" stroke-linecap="round"/><path d="M292 90 C368 96 405 118 445 148" fill="none" stroke="#596f47" stroke-width="34" stroke-linecap="round"/></g>`}
-function pteranodonSVG(x=720,y=145,s=0.85){return `<g transform="translate(${x} ${y}) scale(${s})" opacity=".95"><path d="M0 50 C95 5 180 8 270 60 C166 48 98 48 0 50 Z" fill="#8b7a65" stroke="#4f4338" stroke-width="5"/><path d="M270 60 C350 80 410 122 470 170 C385 155 326 125 270 60 Z" fill="#7b6b59" stroke="#4f4338" stroke-width="5"/><path d="M6 50 C-62 78 -104 120 -145 175 C-74 158 -22 120 6 50 Z" fill="#7b6b59" stroke="#4f4338" stroke-width="5"/><ellipse cx="178" cy="56" rx="42" ry="25" fill="#9a8971"/><path d="M212 50 L298 32 L223 70 Z" fill="#d8c28d" stroke="#4f4338" stroke-width="4"/><path d="M152 52 L96 18" stroke="#6b5b4a" stroke-width="18" stroke-linecap="round"/><circle cx="205" cy="49" r="4" fill="#17201e"/></g>`}
-function babyDinoSVG(x=410,y=505,s=0.62){return `<g transform="translate(${x} ${y}) scale(${s})"><ellipse cx="0" cy="10" rx="34" ry="20" fill="#88a96f"/><ellipse cx="-18" cy="-2" rx="16" ry="14" fill="#94b67a"/><path d="M24 8 C48 2 62 4 82 16" fill="none" stroke="#7d9b66" stroke-width="12" stroke-linecap="round"/><path d="M-32 14 C-46 24 -52 34 -50 44" fill="none" stroke="#7d9b66" stroke-width="8" stroke-linecap="round"/><path d="M-5 24 L-10 40 M12 24 L16 40" stroke="#6e8d59" stroke-width="6" stroke-linecap="round"/><circle cx="-24" cy="-4" r="3.5" fill="#202526"/><circle cx="-25.5" cy="-5.5" r="1" fill="#fff" opacity=".8"/><path d="M-16 8 C-10 12 -3 12 4 8" fill="none" stroke="#5e7b4c" stroke-width="3" stroke-linecap="round"/></g>`}
-function tracksSVG(){return `<g opacity=".42" fill="#6f5535"><ellipse cx="350" cy="520" rx="22" ry="38" transform="rotate(-18 350 520)"/><ellipse cx="322" cy="503" rx="8" ry="18" transform="rotate(-40 322 503)"/><ellipse cx="352" cy="480" rx="8" ry="18" transform="rotate(-6 352 480)"/><ellipse cx="380" cy="503" rx="8" ry="18" transform="rotate(35 380 503)"/><ellipse cx="510" cy="575" rx="22" ry="38" transform="rotate(-16 510 575)"/><ellipse cx="483" cy="558" rx="8" ry="18" transform="rotate(-40 483 558)"/><ellipse cx="513" cy="536" rx="8" ry="18" transform="rotate(-6 513 536)"/><ellipse cx="540" cy="558" rx="8" ry="18" transform="rotate(35 540 558)"/></g>`}
-function grassSVG(){return `<g stroke="#436b39" stroke-width="5" stroke-linecap="round" opacity=".8"><path d="M120 640 C140 590 165 555 210 525"/><path d="M145 650 C175 605 215 580 260 565"/><path d="M225 648 C250 602 290 570 332 548"/><path d="M1030 650 C995 598 950 565 900 542"/><path d="M1070 650 C1035 600 985 580 940 570"/></g>`}
-
-function sceneHTML(scene,mid,reacting){const pieces=[];
-const showFossil=["fossil","fossilPath","wind","morning","celebration"].includes(scene),showTracks=["tracksClose","riverWide","riverNear","trex"].includes(scene),showEgg=["eggNest","eggDialogue"].includes(scene)||(mid==="mission2"&&scene==="words")||(mid==="mission6"&&["words","triceratops","pteranodon"].includes(scene)),showGrass=["grassRustle","eggNest","eggDialogue","triceratops","trex"].includes(scene),showFish=mid==="mission4"&&["fishRiver","riverNear","words"].includes(scene),showTrex=mid==="mission5"&&["trex","tracksClose","words"].includes(scene),showTri=mid==="mission6"&&["triceratops","words","dialogue"].includes(scene),showPtera=mid==="mission6"&&["pteranodon","words","dialogue","fossilPath"].includes(scene),showBaby=mid==="mission7"&&["eggDialogue","spinoGentle","fishRiver","words","dialogue"].includes(scene),showSpino=["spino","spinoClose","spinoGentle"].includes(scene)||(["mission3","mission4","mission5","mission7"].includes(mid)&&["riverWide","riverNear","fishRiver","eggDialogue","dialogue","words"].includes(scene)),showIori=["morning","fossil","wind","riverWide","tracksClose","splash","spino","spinoClose","spinoGentle","fossilPath","riverNear","grassRustle","eggNest","eggDialogue","dialogue","words","fishRiver","trex","triceratops","pteranodon","celebration"].includes(scene);
-if(showTracks)pieces.push(tracksSVG()); if(showGrass)pieces.push(grassSVG()); if(showFish)pieces.push(fishSVG(760,430,1),fishSVG(650,470,.55)); if(showFossil)pieces.push(fossilSVG(170,545,1)); if(showEgg)pieces.push(eggSVG(scene==="eggDialogue"?305:300,scene==="words"?445:405,scene==="words"?.75:1)); if(showTri)pieces.push(triceratopsSVG()); if(showPtera)pieces.push(pteranodonSVG()); if(showTrex)pieces.push(trexSVG()); if(showBaby)pieces.push(babyDinoSVG());
-if(showIori){const pos=scene==="celebration"?[350,495,1.05]:scene==="trex"?[190,492,.86]:scene==="triceratops"||scene==="pteranodon"?[210,492,.88]:[225,490,.9];pieces.push(ioriSVG(...pos));}
-if(showSpino){const pos=scene==="spinoClose"?[500,305,1.03]:scene==="spinoGentle"?[500,325,.94]:scene==="eggDialogue"?[620,330,.82]:scene==="words"?[640,335,.64]:[550,325,.9];pieces.push(spinoSVG(...pos));}
-if(scene==="celebration")pieces.push(`<g opacity=".95"><text x="610" y="170" font-size="54">🐟 👣 🦕 🌊 🦖 🪽 👶 🏆</text><text x="840" y="250" font-size="54">🌟</text></g>`);
-return `<svg class="svgscene" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><defs><linearGradient id="skyReal" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#d9eef8"/><stop offset="55%" stop-color="#eef6dc"/><stop offset="100%" stop-color="#d7e7c7"/></linearGradient><linearGradient id="riverReal" x1="0" x2="1" y1="0" y2="0"><stop offset="0%" stop-color="#8cc9d9"/><stop offset="50%" stop-color="#6fb6c9"/><stop offset="100%" stop-color="#b6dee4"/></linearGradient><linearGradient id="hill1" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#98b783"/><stop offset="100%" stop-color="#799b67"/></linearGradient><linearGradient id="hill2" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#b6cf98"/><stop offset="100%" stop-color="#90ae78"/></linearGradient><linearGradient id="groundSoil" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#c9aa76"/><stop offset="100%" stop-color="#9e7c50"/></linearGradient></defs><rect width="1200" height="700" fill="url(#skyReal)"/><circle cx="980" cy="88" r="44" fill="#fff2a3" opacity=".75"/><g opacity=".75" fill="#fff"><ellipse cx="170" cy="105" rx="96" ry="23"/><ellipse cx="250" cy="95" rx="62" ry="19"/><ellipse cx="760" cy="140" rx="112" ry="24"/><ellipse cx="850" cy="130" rx="65" ry="19"/></g><path d="M0 280 C150 220 280 240 420 210 C600 170 760 215 920 170 C1030 140 1110 120 1200 130 L1200 700 L0 700 Z" fill="url(#hill2)" opacity=".65"/><path d="M0 350 C140 300 270 320 440 280 C610 240 770 285 930 245 C1050 215 1120 210 1200 225 L1200 700 L0 700 Z" fill="url(#hill1)" opacity=".82"/><path d="M-30 390 C140 350 290 410 500 370 C690 335 870 340 1230 280 L1230 500 C1010 540 840 520 650 545 C420 575 200 555 -30 595 Z" fill="url(#riverReal)" opacity=".95"/><path d="M100 420 C230 400 350 425 500 400" stroke="#dff6fb" stroke-width="8" stroke-linecap="round" opacity=".55"/><path d="M710 385 C830 370 930 375 1050 350" stroke="#dff6fb" stroke-width="8" stroke-linecap="round" opacity=".45"/><path d="M0 500 C180 470 320 520 500 505 C710 488 850 495 1200 455 L1200 700 L0 700 Z" fill="url(#groundSoil)" opacity=".92"/>${scene==="wind"?`<g fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".8"><path d="M120 210 C240 170 370 195 520 152"/><path d="M270 270 C420 230 560 250 710 205"/><path d="M70 320 C170 292 265 305 370 270"/></g>`:""}${scene==="fishRiver"||scene==="riverNear"?`<g fill="none" stroke="#eafcff" stroke-width="10" stroke-linecap="round" opacity=".85"><path d="M770 375 C745 330 745 300 758 270"/><path d="M820 372 C840 325 870 298 905 282"/><path d="M860 390 C910 365 945 365 990 390"/></g>`:""}<g class="${reacting?"reacting":""}">${pieces.join("")}</g>${scene==="words"?`<g opacity=".14" fill="#28515b" font-weight="800"><text x="120" y="530" font-size="52">スピノ</text><text x="860" y="470" font-size="48">サウルス</text><text x="650" y="570" font-size="40">かわ</text><text x="140" y="400" font-size="38">タマゴ</text></g>`:""}</svg>`}
-function lineHTML(line,p){if(line==="")return `<p class="line blank"></p>`;const sp=p.dialogue&&line.includes("：");return `<p class="line ${sp?"speaker":""} ${p.wordPractice?"practice":""}"><span>${esc(line)}</span></p>`}
-function renderHome(){const done=doneCount(), rewards=missions.filter(m=>state.completedMissions[m.id]), rec=recIndex();return `<main class="screen"><div class="card homecard"><div class="hero">${sceneHTML("spino","mission3",false)}<div class="herotitle"><div class="dino">🦖</div><h1>きょうりゅう音読ミッション</h1><div class="main-sub">イオリくんと スピノサウルス</div></div></div><div class="home-content"><div class="promise"><div>音読隊のやくそく</div><div>まちがえても、だいじょうぶ。</div><div>とまっても、だいじょうぶ。</div><div>今日のミッションを読めたら、成功！</div><div style="color:#047857;margin-top:5px">できたミッション：${done} / ${missions.length}</div><div class="stampbox"><div style="font-size:12px;color:#475569">あつめたスタンプ</div><div class="stamps">${rewards.length?rewards.map(m=>`<span class="stamp">${m.rewardIcon} ${esc(m.subtitle)}</span>`).join(""):`<span class="stamp" style="background:#f1f5f9;color:#64748b">まだこれから</span>`}</div></div></div><div class="missionsbox"><div style="font-weight:1000;margin-bottom:7px">今日のミッションをえらぼう</div><div class="grid">${missions.map((m,i)=>{const d=state.completedMissions[m.id],n=!d&&i===rec;return `<button class="mission ${d?"done":n?"next":""}" onclick="startMission(${i})"><div class="mhead"><div class="micon">${m.icon}</div><div class="badges">${d?`<span class="badge done">できた</span>`:""}${n?`<span class="badge next">つぎはこれ</span>`:""}<span class="badge">${m.pages.length}ページ</span></div></div><div class="mtitle">${esc(m.title)}</div><div class="msub">${esc(m.subtitle)}</div><div class="goal">${esc(m.goal)}</div></button>`}).join("")}</div></div></div></div></main>`}
-function renderReader(){const m=curM(),p=curP(),total=m.pages.length,dense=p.lines.length>=8,max=p.dialogue?34:p.wordPractice?36:dense?35:42,size=Math.min(state.fontSize,max);return `<main class="screen reader"><div class="reader-meta"><div class="pill">${esc(m.title)}：${esc(m.subtitle)}</div><div class="controls"><button class="small" onclick="showSupport()">🫧 おまもり</button><button class="small" onclick="setState({fontSize:Math.max(24,state.fontSize-2)})">−</button><span style="font-weight:900;font-size:12px">文字</span><button class="small" onclick="setState({fontSize:Math.min(46,state.fontSize+2)})">＋</button></div></div><div class="progress"><div style="width:${((state.page+1)/total)*100}%"></div></div><div class="stage">${sceneHTML(p.scene,m.id,state.reacting)}<div class="label">${esc(p.mark)}</div><div class="page">${state.page+1} / ${total}</div><div class="title">${esc(p.sceneTitle)}</div>${state.praise?`<div class="praise">🦖 ${esc(state.praise)}</div>`:""}<div class="bottom"><div class="lines" style="font-size:clamp(22px, ${size}px, ${max}px)">${p.lines.map(l=>lineHTML(l,p)).join("")}</div><div class="buttons"><button class="btn read ${state.completedPages[state.page]?"done-read":""}" onclick="markRead()">✅ 読めた！</button><button class="btn secondary" ${state.page===0?"disabled":""} onclick="goPrev()">← 前へ</button><button class="btn" onclick="goNext()">${state.page<total-1?"次へ":"成功へ"} →</button></div></div></div></main>`}
-function renderSuccess(){const m=curM();return `<main class="screen"><div class="stage">${sceneHTML(m.successScene,m.id,true)}<div class="success-grid"><div class="success-top"><div class="star">🌟</div><h2>ミッション成功！</h2><div style="color:#047857">${esc(m.title)}、できたね！</div><div style="font-size:12px;color:#047857;margin-top:2px">だいじょうぶ。ゆっくりでいい。</div><div style="font-size:12px;color:#047857">すいすい、すすもう。</div><div class="reward"><span style="font-size:22px">${m.rewardIcon}</span>${esc(m.rewardName)}</div></div><div class="checkbox"><div class="checktitle">今日のチェック</div><div class="checks">${m.checks.map((c,i)=>`<button class="check ${state.checked[i]?"on":""}" onclick="state.checked[${i}]=!state.checked[${i}];render()"><span class="dot">${state.checked[i]?"✓":"☆"}</span>${esc(c)}</button>`).join("")}</div></div><div class="success-buttons"><button class="btn wide" onclick="readAgain()">もう一回読む</button><button class="btn secondary" onclick="backHome()">ホームへ</button><button class="btn secondary" ${state.missionIndex>=missions.length-1?"disabled":""} onclick="goNextMission()">次のミッション</button></div></div></div></main>`}
-function render(){document.getElementById("app").innerHTML=`<div class="app"><header class="top"><button class="homebtn" onclick="backHome()">🏠 ホーム</button><div class="pill">スピノ音読ミッション</div></header>${state.screen==="home"?renderHome():state.screen==="reader"?renderReader():renderSuccess()}</div>`}
-window.startMission=startMission;window.backHome=backHome;window.showSupport=showSupport;window.setState=setState;window.markRead=markRead;window.goPrev=goPrev;window.goNext=goNext;window.readAgain=readAgain;window.goNextMission=goNextMission;window.render=render;
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));render();
+const praiseMessages = [
+  '声に出せた。それだけでミッションは進んでいる。',
+  'ゆっくり読めたね。速度より、確かめる力が大切。',
+  '止まっても戻れた。読み方を自分で選べている。',
+  '一行ずつ進めた。しっかり冒険になっているよ。',
+  '今の読み方、落ち着いていてよかった。'
+];
+const supportMessages = [
+  '止まっても大丈夫。前の言葉に戻って、もう一度始めよう。',
+  '息を長く吐いてから読むと、次の一行に入りやすいよ。',
+  '急がなくていい。意味のまとまりで区切って読もう。',
+  '言葉が出にくいときは、最初の一音だけそっと出してみよう。',
+  '読むことも、話すことも、自分のペースで進めていい。'
+];
+function loadProgress() {
+  const blank = { completedMissions: {}, stamps: {}, fontSize: 21, lastMission: 0 };
+  for (const key of [STORAGE_KEY, ...OLD_KEYS]) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) continue;
+      const saved = JSON.parse(raw);
+      return { ...blank, ...saved, completedMissions: saved.completedMissions || {}, stamps: saved.stamps || {} };
+    } catch(e) {}
+  }
+  return blank;
+}
+let progress = loadProgress();
+let view = { screen: 'home', missionIndex: Math.min(progress.lastMission || 0, missions.length - 1), pageIndex: 0, readPages: {}, toast: '' };
+function saveProgress() { localStorage.setItem(STORAGE_KEY, JSON.stringify(progress)); }
+function esc(v) { return String(v ?? '').replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch])); }
+function missionDoneCount() { return missions.filter(m => progress.completedMissions[m.id]).length; }
+function stampCount() { return missions.filter(m => progress.stamps[m.id]).length; }
+function nextMissionIndex() { const i = missions.findIndex(m => !progress.completedMissions[m.id]); return i < 0 ? missions.length - 1 : i; }
+function startMission(i) { view = { screen:'reader', missionIndex:i, pageIndex:0, readPages:{}, toast:'' }; progress.lastMission = i; saveProgress(); render(); }
+function home() { view.screen='home'; view.toast=''; render(); }
+function currentMission() { return missions[view.missionIndex]; }
+function currentPage() { return currentMission().pages[view.pageIndex]; }
+function setFont(delta) { progress.fontSize = Math.max(18, Math.min(28, (progress.fontSize || 21) + delta)); saveProgress(); render(); }
+function markRead() {
+  view.readPages[view.pageIndex] = true;
+  view.toast = praiseMessages[Math.floor(Math.random()*praiseMessages.length)];
+  setTimeout(() => { view.toast=''; render(); }, 1800);
+  render();
+}
+function support() {
+  view.toast = supportMessages[Math.floor(Math.random()*supportMessages.length)];
+  setTimeout(() => { view.toast=''; render(); }, 2600);
+  render();
+}
+function prevPage() { if (view.pageIndex > 0) { view.pageIndex--; view.toast=''; render(); } }
+function nextPage() {
+  const m=currentMission();
+  if (view.pageIndex < m.pages.length - 1) { view.pageIndex++; view.toast=''; render(); return; }
+  progress.completedMissions[m.id] = true;
+  progress.stamps[m.id] = true;
+  progress.lastMission = view.missionIndex;
+  saveProgress();
+  view.screen = 'success';
+  view.toast='';
+  render();
+}
+function readAgain() { view = { screen:'reader', missionIndex:view.missionIndex, pageIndex:0, readPages:{}, toast:'' }; render(); }
+function nextMission() { const n = Math.min(view.missionIndex + 1, missions.length - 1); startMission(n); }
+function resetProgress() {
+  if (!confirm('進捗とスタンプをリセットしますか？')) return;
+  progress = { completedMissions: {}, stamps: {}, fontSize: 21, lastMission: 0 };
+  saveProgress();
+  view = { screen:'home', missionIndex:0, pageIndex:0, readPages:{}, toast:'' };
+  render();
+}
+function pageParagraphs(text) {
+  return esc(text).split(/\n\s*\n/).map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
+}
+function renderProgressCards() {
+  return `<section class="progressCards" aria-label="進捗">
+    <article class="progressCard"><span class="progressIcon">▰</span><div><b>できたミッション</b><strong>${missionDoneCount()} / ${missions.length}</strong><i><em style="width:${missionDoneCount()/missions.length*100}%"></em></i></div></article>
+    <article class="progressCard accent"><span class="progressIcon">◆</span><div><b>あつめたスタンプ</b><strong>${stampCount()} / ${missions.length}</strong><i><em style="width:${stampCount()/missions.length*100}%"></em></i></div></article>
+  </section>`;
+}
+function renderHome() {
+  const next = nextMissionIndex();
+  return `<main class="screen homeScreen">
+    <section class="homeHero">
+      <div class="heroText">
+        <span class="eyebrow">きょうりゅう</span>
+        <h1>音読ミッション</h1>
+        <p class="subtitle">イオリくんとスピノサウルス</p>
+        <p class="lead">声に出して読むと、物語の手がかりがつながっていく。急がず、一行ずつ、自分のペースで進もう。</p>
+      </div>
+      <div class="heroArt" role="img" aria-label="白亜紀の川辺に立つスピノサウルス"></div>
+    </section>
+    ${renderProgressCards()}
+    <section class="promisePanel">
+      <h2>音読隊の約束</h2>
+      <p>正しく読むことだけが目的ではありません。声に出せたこと、ゆっくり読めたこと、止まっても戻れたことを大切にします。</p>
+    </section>
+    <section class="missionList" aria-label="ミッション一覧">
+      <div class="sectionTitle"><span>⌖</span><h2>ミッション一覧</h2></div>
+      <div class="missionGrid">${missions.map((m,i) => {
+        const done = !!progress.completedMissions[m.id];
+        const isNext = !done && i === next;
+        const locked = i > next && !progress.completedMissions[m.id];
+        return `<button class="missionCard ${done?'done':''} ${isNext?'next':''}" onclick="startMission(${i})">
+          <span class="missionNo">${m.no}</span>
+          <img src="${m.image}" alt="" loading="lazy">
+          <span class="missionInfo"><b>${esc(m.title)}</b><small>${esc(m.goal)}</small></span>
+          <span class="missionBadge ${done?'ok':isNext?'next':'lock'}">${done?'できた':isNext?'つぎはこれ':locked?'未完了':'読む'}</span>
+        </button>`;
+      }).join('')}</div>
+    </section>
+  </main>`;
+}
+function renderReader() {
+  const m=currentMission(), p=currentPage();
+  const pageNo = view.pageIndex + 1;
+  const percent = pageNo / m.pages.length * 100;
+  return `<main class="screen readerScreen">
+    <header class="missionHeader">
+      <button class="iconButton" onclick="home()" aria-label="ホームへ">☰</button>
+      <div class="missionTitleBlock"><small>ミッション${m.no}</small><h1>${esc(m.title)}</h1><div class="pageProgress"><span style="width:${percent}%"></span></div><p>${pageNo} / ${m.pages.length}ページ</p></div>
+      <div class="profileBadge"><span>足跡</span><b>イオリくん</b><i>Lv.12</i></div>
+    </header>
+    <section class="readingLayout">
+      <aside class="readingArt" style="background-image:url('assets/spino-river.jpg')"><div class="artCaption">白亜紀の川辺</div></aside>
+      <article class="readingPanel">
+        <div class="readLabel"><span>□</span>物語を読もう</div>
+        <h2>${esc(p.title)}</h2>
+        <div class="focus">${esc(p.focus)}</div>
+        <div class="storyText" style="font-size:${progress.fontSize || 21}px">${pageParagraphs(p.text)}</div>
+        <div class="readerControls">
+          <button class="outline" onclick="prevPage()" ${view.pageIndex===0?'disabled':''}>‹ 前へ</button>
+          <button class="primary ${view.readPages[view.pageIndex]?'read':''}" onclick="markRead()">読めた！</button>
+          <button class="outline gold" onclick="nextPage()">${view.pageIndex < m.pages.length-1 ? '次へ ›' : '成功へ ›'}</button>
+        </div>
+        <div class="subControls">
+          <button onclick="setFont(-1)">A− 文字サイズ</button>
+          <button onclick="setFont(1)">A＋ 文字サイズ</button>
+          <button onclick="support()">盾 おまもり</button>
+        </div>
+        <p class="supportLine">ゆっくりで大丈夫。話すことも、読むことも、どちらも大切な一歩です。</p>
+      </article>
+    </section>
+    ${view.toast ? `<div class="toast">${esc(view.toast)}</div>` : ''}
+  </main>`;
+}
+function renderSuccess() {
+  const m=currentMission();
+  return `<main class="screen successScreen">
+    <section class="successCard">
+      <div class="successArt"><img src="${m.image}" alt=""></div>
+      <div class="successBody">
+        <span class="result">MISSION CLEAR</span>
+        <h1>ミッション成功！</h1>
+        <p>${esc(m.title)}を最後まで読みました。</p>
+        <div class="stampReward"><span>${m.rewardIcon}</span><b>${esc(m.rewardName)}</b></div>
+        <section class="todayCheck"><h2>今日のチェック</h2>${m.checks.map((c,i)=>`<label><input type="checkbox"> <span>${esc(c)}</span></label>`).join('')}</section>
+        <div class="successControls"><button class="primary" onclick="readAgain()">もう一回読む</button><button class="outline" onclick="home()">ホームへ</button><button class="outline gold" onclick="nextMission()" ${view.missionIndex>=missions.length-1?'disabled':''}>次のミッション</button></div>
+      </div>
+    </section>
+  </main>`;
+}
+function renderShell(inner) {
+  return `<div class="app">
+    ${inner}
+    <nav class="bottomNav" aria-label="アプリ内メニュー">
+      <button onclick="home()" class="${view.screen==='home'?'active':''}"><span>⌂</span>ホーム</button>
+      <button onclick="startMission(nextMissionIndex())"><span>▤</span>物語</button>
+      <button onclick="support()"><span>◉</span>おまもり</button>
+      <button onclick="home()"><span>◆</span>スタンプ</button>
+      <button onclick="resetProgress()"><span>↺</span>リセット</button>
+    </nav>
+  </div>`;
+}
+function render() {
+  const app=document.getElementById('app');
+  const inner = view.screen === 'home' ? renderHome() : view.screen === 'reader' ? renderReader() : renderSuccess();
+  app.innerHTML = renderShell(inner);
+}
+window.startMission=startMission; window.home=home; window.prevPage=prevPage; window.nextPage=nextPage; window.markRead=markRead; window.support=support; window.setFont=setFont; window.readAgain=readAgain; window.nextMission=nextMission; window.resetProgress=resetProgress;
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
+render();
