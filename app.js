@@ -8,7 +8,7 @@ const missions = [
     "goal": "短い説明文を、観察しながらゆっくり読む",
     "rewardIcon": "🐟",
     "rewardName": "光る化石スタンプ",
-    "image": "assets/mission-1.svg",
+    "image": "assets/mission-1.jpg",
     "checks": [
       "声に出して最初の一文を読めた",
       "化石の様子を想像しながら読めた",
@@ -50,7 +50,7 @@ const missions = [
     "goal": "濁音や硬い音を、あわてず確かめて読む",
     "rewardIcon": "👣",
     "rewardName": "大きな足跡スタンプ",
-    "image": "assets/mission-2.svg",
+    "image": "assets/mission-2.jpg",
     "checks": [
       "足跡の説明を読めた",
       "か・が・た・だを落ち着いて読めた",
@@ -92,7 +92,7 @@ const missions = [
     "goal": "長い恐竜名を、意味で区切って読む",
     "rewardIcon": "🦕",
     "rewardName": "スピノサウルススタンプ",
-    "image": "assets/mission-3.svg",
+    "image": "assets/mission-3.jpg",
     "checks": [
       "スピノサウルスを区切って読めた",
       "長い文を一息ずつ読めた",
@@ -134,7 +134,7 @@ const missions = [
     "goal": "場面の動きに合わせて、リズムよく読む",
     "rewardIcon": "🌊",
     "rewardName": "川わたりスタンプ",
-    "image": "assets/mission-4.svg",
+    "image": "assets/mission-4.jpg",
     "checks": [
       "川の流れを想像して読めた",
       "短い文と長い文を切り替えられた",
@@ -176,7 +176,7 @@ const missions = [
     "goal": "緊張する場面でも、間を取って読む",
     "rewardIcon": "🦖",
     "rewardName": "ティラノ気配スタンプ",
-    "image": "assets/mission-5.svg",
+    "image": "assets/mission-5.jpg",
     "checks": [
       "ドキドキする場面を読めた",
       "間を取って読めた",
@@ -218,7 +218,7 @@ const missions = [
     "goal": "問いかけ文と説明文を、声の調子で読み分ける",
     "rewardIcon": "🪽",
     "rewardName": "巣さがしスタンプ",
-    "image": "assets/mission-6.svg",
+    "image": "assets/mission-6.jpg",
     "checks": [
       "問いかけ文を読めた",
       "長い恐竜名を分けて読めた",
@@ -260,7 +260,7 @@ const missions = [
     "goal": "やさしい声で、感情のある文を読む",
     "rewardIcon": "👶",
     "rewardName": "川辺の約束スタンプ",
-    "image": "assets/mission-7.svg",
+    "image": "assets/mission-7.jpg",
     "checks": [
       "やさしい声で読めた",
       "気持ちを込めて読めた",
@@ -302,7 +302,7 @@ const missions = [
     "goal": "物語全体をふり返り、達成感を持って読む",
     "rewardIcon": "🏆",
     "rewardName": "音読ミッション達成スタンプ",
-    "image": "assets/mission-8.svg",
+    "image": "assets/mission-8.jpg",
     "checks": [
       "最後のページを読めた",
       "これまでの冒険を思い出せた",
@@ -356,7 +356,7 @@ const supportMessages = [
 
 const readerArtByMission = Object.fromEntries(
   missions.map((m) => [m.id, m.pages.map((p, idx) => ({
-    image: `assets/reader-${m.no}-${idx + 1}.svg`,
+    image: `assets/reader-${m.no}-${idx + 1}.jpg`,
     caption: p.title
   }))])
 );
