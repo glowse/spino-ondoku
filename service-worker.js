@@ -1,5 +1,6 @@
-const CACHE_NAME='spino-ondoku-redesign-v1';
-const ASSETS=["./", "./index.html", "./style.css", "./app.js", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./assets/spino-river.jpg", "./assets/spino-hero.jpg", "./assets/mission-1.jpg", "./assets/mission-2.jpg", "./assets/mission-3.jpg", "./assets/mission-4.jpg", "./assets/mission-5.jpg", "./assets/mission-6.jpg", "./assets/mission-7.jpg", "./assets/mission-8.jpg"];
+const CACHE_NAME='spino-ondoku-redesign-v2';
+const PAGE_ASSETS=Array.from({length:8},(_,mi)=>Array.from({length:5},(_,pi)=>`./assets/reader-${mi+1}-${pi+1}.jpg`)).flat();
+const ASSETS=["./", "./index.html", "./style.css", "./app.js", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./assets/spino-river.jpg", "./assets/spino-hero.jpg", "./assets/mission-1.jpg", "./assets/mission-2.jpg", "./assets/mission-3.jpg", "./assets/mission-4.jpg", "./assets/mission-5.jpg", "./assets/mission-6.jpg", "./assets/mission-7.jpg", "./assets/mission-8.jpg", ...PAGE_ASSETS];
 
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(ASSETS)));

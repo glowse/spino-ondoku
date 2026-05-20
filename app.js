@@ -353,6 +353,20 @@ const supportMessages = [
   '言葉が出にくいときは、最初の一音だけそっと出してみよう。',
   '読むことも、話すことも、自分のペースで進めていい。'
 ];
+
+const readerArtByMission = Object.fromEntries(
+  missions.map((m) => [m.id, m.pages.map((p, idx) => ({
+    image: `assets/reader-${m.no}-${idx + 1}.jpg`,
+    caption: p.title
+  }))])
+);
+missions.forEach((m) => {
+  m.pages.forEach((p, idx) => {
+    const art = readerArtByMission[m.id][idx];
+    p.image = art.image;
+    p.artCaption = art.caption;
+  });
+});
 function loadProgress() {
   const blank = { completedMissions: {}, stamps: {}, fontSize: 21, lastMission: 0 };
   for (const key of [STORAGE_KEY, ...OLD_KEYS]) {
@@ -462,7 +476,7 @@ function renderReader() {
       <div class="profileBadge"><span>足跡</span><b>イオリくん</b><i>Lv.12</i></div>
     </header>
     <section class="readingLayout">
-      <aside class="readingArt" style="background-image:url('assets/spino-river.jpg')"><div class="artCaption">白亜紀の川辺</div></aside>
+      <aside class="readingArt" style="background-image:url('${esc(p.image)}')" role="img" aria-label="${esc(p.artCaption)}の場面イラスト"><div class="artCaption">${esc(p.artCaption)}</div></aside>
       <article class="readingPanel">
         <div class="readLabel"><span>□</span>物語を読もう</div>
         <h2>${esc(p.title)}</h2>
