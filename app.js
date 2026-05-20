@@ -356,7 +356,7 @@ const supportMessages = [
 
 const readerArtByMission = Object.fromEntries(
   missions.map((m) => [m.id, m.pages.map((p, idx) => ({
-    image: `assets/reader-${m.no}-${idx + 1}.jpg`,
+    image: `assets/reader-tablet-v6-${m.no}-${idx + 1}.jpg`,
     caption: p.title
   }))])
 );
@@ -476,7 +476,10 @@ function renderReader() {
       <div class="profileBadge"><span>足跡</span><b>イオリくん</b><i>Lv.12</i></div>
     </header>
     <section class="readingLayout">
-      <aside class="readingArt" style="background-image:url('${esc(p.image)}')" role="img" aria-label="${esc(p.artCaption)}の場面イラスト"><div class="artCaption">${esc(p.artCaption)}</div></aside>
+      <aside class="readingArt" style="--art:url('${esc(p.image)}')" role="img" aria-label="${esc(p.artCaption)}の場面イラスト">
+        <img class="readingImage" src="${esc(p.image)}" alt="" loading="eager" decoding="async" />
+        <div class="artCaption">${esc(p.artCaption)}</div>
+      </aside>
       <article class="readingPanel">
         <div class="readLabel"><span>□</span>物語を読もう</div>
         <h2>${esc(p.title)}</h2>

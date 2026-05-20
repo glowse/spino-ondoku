@@ -1,5 +1,5 @@
-const CACHE_NAME='spino-ondoku-redesign-v5';
-const PAGE_ASSETS=Array.from({length:8},(_,mi)=>Array.from({length:5},(_,pi)=>`./assets/reader-${mi+1}-${pi+1}.jpg`)).flat();
+const CACHE_NAME='spino-ondoku-redesign-v6';
+const PAGE_ASSETS=Array.from({length:8},(_,mi)=>Array.from({length:5},(_,pi)=>`./assets/reader-tablet-v6-${mi+1}-${pi+1}.jpg`)).flat();
 const MISSION_ASSETS=Array.from({length:8},(_,i)=>`./assets/mission-${i+1}.jpg`);
 const ASSETS=["./", "./index.html", "./style.css", "./app.js", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./assets/spino-river.jpg", "./assets/spino-hero.jpg", ...MISSION_ASSETS, ...PAGE_ASSETS];
 
