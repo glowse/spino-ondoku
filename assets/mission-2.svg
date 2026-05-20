@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img">
+
+  <defs>
+    <linearGradient id="sky2_1_t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d3c31"/><stop offset="0.58" stop-color="#b89355"/><stop offset="1" stop-color="#5b472d"/></linearGradient>
+    <linearGradient id="river2_1_t" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#244d55"/><stop offset="0.5" stop-color="#4d7b79"/><stop offset="1" stop-color="#141f21"/></linearGradient>
+    <linearGradient id="ground2_1_t" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b472d"/><stop offset="1" stop-color="#181613"/></linearGradient>
+    <radialGradient id="sun2_1_t" cx="72%" cy="20%" r="40%"><stop offset="0" stop-color="#ffe4a4" stop-opacity="0.9"/><stop offset="0.45" stop-color="#d19655" stop-opacity="0.28"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <pattern id="grain2_1_t" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M1 4h1M8 14h1M16 8h1M12 2h1M20 19h1" stroke="#fff" stroke-opacity=".075" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="960" height="540" fill="url(#sky2_1_t)"/>
+  <rect width="960" height="540" fill="url(#sun2_1_t)"/>
+  <path d="M0 248.4 C153.6 183.6 268.8 286.2 432.0 226.8 C595.2 162.0 748.8 270.0 960.0 194.4 L960 421.2 L0 421.2 Z" fill="#19272b" opacity=".52"/>
+  <path d="M0 313.2 C211.2 280.8 268.8 329.4 499.2 291.6 C691.2 259.2 796.8 329.4 960.0 291.6 L960 442.8 L0 442.8 Z" fill="#0e1f22" opacity=".70"/>
+  
+  <path d="M0 421.2 C192.0 378.0 364.8 464.4 556.8 415.8 C729.6 372.6 844.8 453.6 960 426.6 L960 540 L0 540 Z" fill="url(#ground2_1_t)"/>
+  <rect width="960" height="540" fill="url(#grain2_1_t)" opacity=".7"/>
+
+<g transform="translate(364.8 388.8) scale(0.75)" fill="#d6c188" opacity=".82"><ellipse cx="0" cy="0" rx="30" ry="22" transform="rotate(-18 0 0)"/><ellipse cx="-32" cy="-32" rx="12" ry="16"/><ellipse cx="0" cy="-44" rx="12" ry="16"/><ellipse cx="32" cy="-32" rx="12" ry="16"/><ellipse cx="95" cy="-58" rx="30" ry="22" transform="rotate(-18 95 -58)"/><ellipse cx="63" cy="-90" rx="12" ry="16"/><ellipse cx="95" cy="-102" rx="12" ry="16"/><ellipse cx="127" cy="-90" rx="12" ry="16"/><ellipse cx="190" cy="-116" rx="30" ry="22" transform="rotate(-18 190 -116)"/><ellipse cx="158" cy="-148" rx="12" ry="16"/><ellipse cx="190" cy="-160" rx="12" ry="16"/><ellipse cx="222" cy="-148" rx="12" ry="16"/><ellipse cx="285" cy="-174" rx="30" ry="22" transform="rotate(-18 285 -174)"/><ellipse cx="253" cy="-206" rx="12" ry="16"/><ellipse cx="285" cy="-218" rx="12" ry="16"/><ellipse cx="317" cy="-206" rx="12" ry="16"/></g>
+</svg>
